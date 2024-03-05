@@ -1,34 +1,34 @@
 
 // 字节码文件相关枚举值
-namespace airrt::abc
+namespace airrt::abc::Enum
 {
     // 文件头相关枚举值
-    struct FileHeaderEnum
+    struct FileHeader
     {
         enum : unsigned int
         {
             // 文件标识
             magic = '#' | 'A' << 8 | 'I' << 16 | 'R' << 24,
 
-            endianBig = 0xAA,    // 大端字节序
-            endianLittle = 0x55, // 小端字节序
+            endian_big = 0xAA,    // 大端字节序
+            endian_little = 0x55, // 小端字节序
 
-            arch32 = 0x32, // 32位地址架构
-            arch64 = 0x64, // 64位地址架构
+            arch_bit32 = 0x32, // 32位地址架构
+            arch_bit64 = 0x64, // 64位地址架构
 
-            kindDynamic = 0x01,    // 动态库
-            kindExecutable = 0x02, // 可执行文件
-            kindLibrary = 0x03,    // 共享库
-            kindObject = 0x04,     // 对象文件
+            kind_dynamic = 0x01,    // 动态库
+            kind_executable = 0x02, // 可执行文件
+            kind_library = 0x03,    // 共享库
+            kind_object = 0x04,     // 对象文件
 
-            format = 0x00000001, // 字节码文件格式
+            format_v1 = 0x00000001, // 字节码文件格式
 
-            instruct = 0x00000001, // 指令版本
+            instruct_v1 = 0x00000001, // 指令版本
         };
     };
 
     // 段节表枚举相关枚举值
-    struct SegmentTableEnum
+    struct SegmentTable
     {
         enum : unsigned int
         {
@@ -78,7 +78,7 @@ namespace airrt::abc
     };
 
     // 类型表相关枚举值
-    struct TypeTableEnum
+    struct TypeTable
     {
         enum : unsigned int
         {
@@ -93,7 +93,7 @@ namespace airrt::abc
             // 结构体类型
             struct_type = 1 << 3,
             // 联合体类型
-            struct_type = 1 << 4,
+            union_type = 1 << 4,
             // 类类型
             class_type = 1 << 5,
             // 接口类型
@@ -107,7 +107,7 @@ namespace airrt::abc
     };
 
     // 函数表相关枚举值
-    struct FunctionTableEnum
+    struct FunctionTable
     {
         enum : unsigned int
         {
@@ -140,6 +140,15 @@ namespace airrt::abc
             no_data = 1 << 30,
             // 函数背景数据已加载
             data_loaded = 1u << 31,
+        };
+    };
+
+    // 操作码相关枚举值
+    struct Opcode
+    {
+        enum : unsigned int
+        {
+            Nop = 0, // 空操作
         };
     };
 

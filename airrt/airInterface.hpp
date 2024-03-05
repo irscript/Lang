@@ -10,7 +10,7 @@ namespace airrt
     {
         virtual ~IExecutor() = default;
         // 设置运行参数
-        virtual bool setParam(abc::FunctionHD *func, uint32_t argc, uint32_t *argv) = 0;
+        virtual bool setEntry(abc::FunctionHD *func, uint32_t argc, uint32_t *argv,void* ret) = 0;
         // 执行
         virtual uintptr_t exec() = 0;
     };
@@ -20,7 +20,7 @@ namespace airrt
         virtual ~IContext() = default;
 
         // 获取函数
-        virtual abc::FunctionHD *getFunc(abc::String &name) = 0;
+      //  virtual abc::FunctionHD *getFunc(abc::String &name) = 0;
 
         // 获取执行器
         virtual IExecutor *newExecutor() = 0;
