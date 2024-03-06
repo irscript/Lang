@@ -67,7 +67,7 @@ namespace airrt::abc
     };
 
     // 程序版本作者等信息，在文件中存储使用压缩后的json格式
-    struct FileInfo
+    struct AuthorInfo
     {
         const char *mName;    // 程序名
         const char *mVersion; // 版本号
@@ -161,11 +161,33 @@ namespace airrt::abc
         uint32_t mCount; // 成员数量
         union
         {
-            uintptr_t mIndex;    // 字符串索引
-            const String *mName; // 字符串地址
-        };                       // 类型名
-        size_t mSize;            // 大小
-        size_t mAlign;           // 对齐
+            uintptr_t mIndex;        // 字符串索引
+            const String *mInstance; // 字符串地址
+        } mName;                     // 类型名
+        size_t mSize;                // 大小
+        size_t mAlign;               // 对齐
+    };
+
+    // 成员字段信息头
+    struct Field
+    {
+        union
+        {
+            uintptr_t mIndex;        // 类型索引
+            const TypeHD *mInstance; // 类型地址
+        } mType;                     // 类型名
+        union
+        {
+            uintptr_t mIndex;        // 字符串索引
+            const String *mInstance; // 字符串地址
+        } mName;                     // 成员名
+    };
+    // 成员字段表
+    struct FieldTable
+    {
+        uintptr_t mCount; // 成员数量
+
+        Field mField[]; // 成员信息
     };
 
     // 基本类型
@@ -212,6 +234,91 @@ namespace airrt::abc
         Item mItems[]; // 类型表项
     };
 
+    // 函数参数签名项头
+    struct SignArgHD
+    {
+        union Flag
+        {
+            uintptr_t mValue;
+            struct
+            {
+                uint32_t mIsPtr : 1; // 是指针？
+                uint32_t mPtr : 8;   // 指针维度
+
+                uint32_t mIsDynArr : 1; // 是动态数组？
+                uint32_t mIsDynBlk : 1; // 是动态块数组？
+                uint32_t mDynArr : 8;   // 动态数组维度
+
+                uint32_t mIsBit : 1; // 是位域成员？
+
+                uint32_t mIsStcArr : 1; // 是静态数组？
+                uint32_t mStcArr : 8;   // 静态数组维度
+
+                uint32_t reserv : 3; // 保留
+            };
+        };
+        Flag mFlag; // 参数类型标记
+        union
+        {
+            uintptr_t mIndex;       // 成员索引
+            const Field *mInstance; // 成员地址
+        } mFiled;                   // 成员：描述参数的基元类型和名称
+
+        uint32_t mSize;
+        uint32_t moffset;
+    };
+
+    // 普通参数
+    using SignArg = SignArgHD;
+    // 静态数组参数
+    struct StcArrArg : public SignArgHD
+    {
+        uintptr_t mCols; // 数组维度值
+    };
+
+    // 返回值描述
+    struct SignReturn
+    {
+        SignArgHD::Flag mFlag; // 参数类型标记
+        union
+        {
+            uintptr_t mIndex;    // 类型索引
+            const TypeHD *mName; // 类型地址
+        } mType;                 // 类型
+    };
+    // 函数签名
+    struct FunctionSign
+    {
+        uint32_t mFlag;  // 签名标志
+        uint32_t mCount; // 参数数量
+        union
+        {
+            uintptr_t mOffset;     // 描述偏移值
+            SignReturn *mInstance; // 描述实例地址
+        } mReturn;                 // 返回值信息
+
+        union ArgItem
+        {
+            uintptr_t mOffset; // 偏移值
+            SignArgHD *mArg;   // 参数地址
+        };
+
+        ArgItem mArgs[]; // 参数列表
+    };
+
+    // 函数签名段表
+    struct SignatureTable
+    {
+        uintptr_t mCount; // 签名数量
+
+        union Item
+        {
+            FunctionSign *mSign; // 签名表项地址
+            uintptr_t mOffset;   // 签名表项偏移
+        };
+        Item mItems[]; // 签名表项
+    };
+
     // 函数信息头
     struct FunctionHD
     {
@@ -219,14 +326,19 @@ namespace airrt::abc
         {
             uintptr_t mIndex;    // 字符串索引
             const String *mName; // 字符串地址
-        };                       // 函数名
-        uintptr_t mSign;         // 函数签名
-        uintptr_t mData;         // 背景数据：文件中是偏移，内存中会计算并存储真正的偏移地址
-        uint32_t mFlag;          // 函数标志
-        uint32_t mRegs;          // 函数使用的寄存器数量
-        uint32_t mArgs;          // 函数的参数寄存器数量
-        uint32_t mTotal;         // 函数指令数量
-        uint16_t mItem[];        // 函数指令
+        } mName;                 // 函数名
+        union
+        {
+            uintptr_t mSign;        // 函数签名索引
+            FunctionSign *mSignPtr; // 函数签名地址
+        } mSign;                    // 函数签名
+
+        uintptr_t mData;  // 背景数据：文件中是偏移，内存中会计算并存储真正的偏移地址
+        uint32_t mFlag;   // 函数标志
+        uint32_t mRegs;   // 函数使用的寄存器数量
+        uint32_t mArgs;   // 函数的参数寄存器数量
+        uint32_t mTotal;  // 函数指令数量
+        uint16_t mItem[]; // 函数指令
     };
 
     // 函数段表
@@ -257,6 +369,10 @@ namespace airrt::abc
         uintptr_t mANIsec;        // ANI节
         DynamicTable *mDyntab;    // 动态库节表
         uintptr_t mDynsec;        // 动态库节
+        FieldTable *mFieldtab;    // 成员字段节表
+        uintptr_t mFieldsec;      // 成员字段节
+        SignatureTable *mSigntab; // 签名节表
+        uintptr_t mSignsec;       // 签名节
         TypeTable *mTypetab;      // 类型节表
         uintptr_t mTypesec;       // 类型节
         FunctionTable *mFunctab;  // 函数节表

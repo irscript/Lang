@@ -106,6 +106,24 @@ namespace airrt::abc::Enum
         };
     };
 
+
+    //签名表相关枚举值
+    struct SignatureTable
+    {
+        enum : unsigned int
+        {
+            unknown = 0, // 未知
+
+            // 签名数据已初始化
+            initialized = 1 << 0,
+
+            // 无返回值
+            noreturn = 1 << 1,
+            // 成员函数
+            method  = 1 << 2,
+        };
+    };
+   
     // 函数表相关枚举值
     struct FunctionTable
     {
@@ -143,6 +161,8 @@ namespace airrt::abc::Enum
         };
     };
 
+    
+    
     // 操作码相关枚举值
     struct Opcode
     {
