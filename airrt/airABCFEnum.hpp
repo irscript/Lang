@@ -1,3 +1,5 @@
+#ifndef __AIRABCFENUM_INC__
+#define __AIRABCFENUM_INC__
 
 // 字节码文件相关枚举值
 namespace airrt::abc::Enum
@@ -103,6 +105,11 @@ namespace airrt::abc::Enum
             // 成员函数委托类型
             dynamic_delegate_type = 1 << 8,
 
+            //未实现接口
+            unimplemented_interface = 1 << 9,
+            //未继承父类
+            unimplemented_parent = 1 << 10,
+           
         };
     };
 
@@ -161,15 +168,17 @@ namespace airrt::abc::Enum
         };
     };
 
-    
-    
-    // 操作码相关枚举值
-    struct Opcode
-    {
+    //重定位表相关枚举值
+    struct RelocationTable{
         enum : unsigned int
         {
-            Nop = 0, // 空操作
+            unknown = 0, // 未知
+
+            //标识重定位项类别
+            
         };
     };
-
+    
+    
 }
+#endif // __AIRABCFENUM_INC__

@@ -1,5 +1,9 @@
-#include "airInterface.hpp"
+#ifndef __AIRCONTEXT_INC__
+#define __AIRCONTEXT_INC__
 
+#include "airInterface.hpp"
+#include <vector>
+#include <memory>
 namespace airrt
 {
     // 字节码文件管理
@@ -8,18 +12,30 @@ namespace airrt
         FileManager();
         ~FileManager();
 
+        using FileRef = std::unique_ptr<abc::BCFile>;
         // 加载文件
-        abc::BCFile *load(const char *path);
+        FileRef load(const char *path);
         // 释放文件
-        void release(abc::BCFile *file);
+        void release(FileRef file);
 
     private:
-        uint32_t file;       // 文件最大数量:缓存数量
-        uint32_t count;      // 文件真实数量:实际数量
-        abc::BCFile **files; // 文件数组
-        abc::String *main;   // 主文件名称
+        std::vector<FileRef> mFiles;        // 文件列表
+        std::unique_ptr<abc::String> mMian; // 主文件名称
     };
 
+    // 对象头
+    struct ObjectHD
+    {
+        abc::TypeHD *mType; // 对象基元类型
+        int32_t mRefcnt;    // 引用计数
+        union
+        {
+            uint32_t mValue;
+            struct{
+                
+            };
+        } mFlag; // 对象标记
+    };
     // 内存管理
     struct MemoryManager
     {
@@ -28,10 +44,22 @@ namespace airrt
 
         // 释放内存
         void release(void *ptr);
+        // 分配内存
+        void *alloc(uintptr_t size);
+
+        // 分配对象
+        void *allocObject(uintptr_t size);
+        // 释放对象
+        void releaseObject(void *ptr);
 
     private:
-        uint32_t count; // 内存数量
-        void **mems;    // 内存数组
+    };
+
+    // 线程管理
+    struct ThreadManager
+    {
+        ThreadManager();
+        ~ThreadManager();
     };
     // 运行时环境上下文
     struct EvnContext : IContext
@@ -95,3 +123,4 @@ namespace airrt
     };
 
 }
+#endif // __AIRCONTEXT_INC__

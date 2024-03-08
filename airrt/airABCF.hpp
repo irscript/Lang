@@ -168,7 +168,7 @@ namespace airrt::abc
         size_t mAlign;               // 对齐
     };
 
-    // 成员字段信息头
+    // 成员域字段信息
     struct Field
     {
         union
@@ -182,7 +182,7 @@ namespace airrt::abc
             const String *mInstance; // 字符串地址
         } mName;                     // 成员名
     };
-    // 成员字段表
+    // 成员域字段表
     struct FieldTable
     {
         uintptr_t mCount; // 成员数量
@@ -197,28 +197,186 @@ namespace airrt::abc
     struct EnumType : public TypeHD
     {
     };
+    //
+    union MemberFlag
+    {
+        uint32_t mValue;
+        struct
+        {
+            uint32_t mIsPtr : 1; // 是指针？
+            uint32_t mPtr : 8;   // 指针维度
+
+            uint32_t mIsDynArr : 1; // 是动态数组？
+            uint32_t mIsDynBlk : 1; // 是动态块数组？
+            uint32_t mDynArr : 8;   // 动态数组维度
+
+            uint32_t mIsBit : 1; // 是位域成员？
+
+            uint32_t mIsStcArr : 1; // 是静态数组？
+            uint32_t mStcArr : 8;   // 静态数组维度
+
+            uint32_t mIsStatic : 1; // 是静态成员？
+            uint32_t mReserv : 2;   // 保留
+        };
+    };
+    // 成员变量头
+    struct MemberItemHD
+    {
+
+        MemberFlag mFlag; // 成员标志
+        uint32_t mOffset; // 成员在类型中的偏移
+        union
+        {
+            uintptr_t mIndex; // 成员域索引
+            Field *mInstance; // 成员域地址
+        } mField;             // 成员的基元类型和名称
+    };
+
+    // 普通成员变量
+    using MemberItem = MemberItemHD;
+    // 位域成员变量
+    struct BitFieldMember : public MemberItemHD
+    {
+        /*复用标记表示信息
+            mDynArr	用来标识位偏移，范围[0,255]
+            mStcArr	用于标识位长度，范围[1,255]
+        */
+    };
+
+    // 静态数组成员变量
+    struct StaticArrayMember : public MemberItemHD
+    {
+        uintptr_t mCols[]; // 静态数组大小
+    };
+
+    // 成员变量表
+    struct MemberVarTable
+    {
+        uintptr_t mCount; // 成员数量
+
+        union Item
+        {
+            MemberItemHD *mItem; // 成员表项地址
+            uintptr_t mOffset;   // 成员表项偏移
+        };
+        Item mItems[]; // 成员表项
+    };
+    // 成员函数表
+    struct MemberFuncTable
+    {
+        uintptr_t mCount; // 函数数量
+
+        union Item
+        {
+            FunctionHD *mItem; // 函数表项地址
+            uintptr_t mIndex;  // 函数表项索引
+        };
+        Item mItems[]; // 函数表项
+    };
 
     // 结构体类型
     struct StructType : public TypeHD
     {
+        union
+        {
+            uintptr_t mOffset;     // 偏移
+            MemberVarTable *mVars; // 成员变量表
+        } mVartab;                 // 成员变量表
+        union
+        {
+            uintptr_t mOffset; // 偏移
+            MemberFuncTable *mFuns;
+        } mFuntab; // 成员函数表
     };
 
     // 联合体
-    struct UnionType : public TypeHD
+    struct UnionType : public StructType
     {
+    };
+
+    // 虚函数表
+    struct VFuncTable
+    {
+        uintptr_t mCount; // 函数数量
+
+        union Item
+        {
+            FunctionHD *mFunc; // 函数表项地址
+            uintptr_t mIndex;  // 函数表项索引
+        };
+        Item mItems[]; // 函数表项
+    };
+    // 接口表
+    struct InterfaceType;
+    struct INFTable
+    {
+        uintptr_t mCount; // 函数数量
+
+        struct Item
+        {
+            uintptr_t mOffset; // 在虚函数表中的偏移
+            union
+            {
+                uintptr_t mIndex;     // 接口类型索引
+                InterfaceType *mType; // 接口类型地址
+            };
+        };
+
+        Item mItems[]; // 接口表项
     };
 
     // 类类型
     struct ClassType : public TypeHD
     {
+        union
+        {
+            uintptr_t mIndex; // 父类型索引
+            TypeHD *mType;    // 类型地址
+        } mParent;
+        union
+        {
+            uintptr_t mOffset;     // 偏移
+            MemberVarTable *mVars; // 成员变量表
+        } mVartab;                 // 成员变量表
+        union
+        {
+            uintptr_t mOffset;      // 偏移
+            MemberFuncTable *mFuns; //
+        } mFuntab;                  // 成员函数表
+        union
+        {
+            uintptr_t mOffset; // 偏移
+            VFuncTable *mVFuncs;
+        } mVftab; // 虚函数表
+        union
+        {
+            uintptr_t mOffset; // 偏移
+            INFTable *mINFs;   // 偏移
+        } mINFTab;             // 接口表
     };
+
     // 接口类型
     struct InterfaceType : public TypeHD
     {
+        uintptr_t mCount; // 接口函数数量
+
+        union Item
+        {
+            uintptr_t mIndex;    // 签名索引
+            FunctionSign *mSign; // 签名地址
+        };
+
+        Item mItems[]; // 接口表项
     };
     // 委托类型
+    struct FunctionSign; // 函数签名
     struct DelegateType : public TypeHD
     {
+        union
+        {
+            uintptr_t mIndex;    // 签名索引
+            FunctionSign *mSign; // 签名地址
+        } mDecl;                 // 委托声明签名·
     };
 
     // 类型段表
@@ -324,14 +482,14 @@ namespace airrt::abc
     {
         union
         {
-            uintptr_t mIndex;    // 字符串索引
-            const String *mName; // 字符串地址
-        } mName;                 // 函数名
+            uintptr_t mIndex;   // 字符串索引
+            const String *mStr; // 字符串地址
+        } mName;                // 函数名
         union
         {
-            uintptr_t mSign;        // 函数签名索引
-            FunctionSign *mSignPtr; // 函数签名地址
-        } mSign;                    // 函数签名
+            uintptr_t mIndex;   // 函数签名索引
+            FunctionSign *mPtr; // 函数签名地址
+        } mSign;                // 函数签名
 
         uintptr_t mData;  // 背景数据：文件中是偏移，内存中会计算并存储真正的偏移地址
         uint32_t mFlag;   // 函数标志
@@ -348,10 +506,22 @@ namespace airrt::abc
         FunctionHD *mItems[];
     };
 
+    // 重定位项头
+    struct RelocationItemHD
+    {
+        uint32_t mFlag; // 头部标志
+    };
+
     // 重定位段表
     struct RelocationTable
     {
         uintptr_t mCount; // 重定位数量
+        union Item
+        {
+            uintptr_t mOffset;       // 项偏移
+            RelocationItemHD *mItem; // 项地址
+        };
+        Item mItems[]; // 重定位项表
     };
 
     // 字节码文件
