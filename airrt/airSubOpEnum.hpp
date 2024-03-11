@@ -130,54 +130,60 @@ namespace airrt::abc::Enum
 
             // 与 0 比较运算
 
-            cmp_ltz_i32 = 12, // 32 bit 整数 与 0 比较，des = src < 0 ? 1 : 0
-            cmp_ltz_i64 = 13, // 64 bit 整数 与 0 比较，des = src < 0 ? 1 : 0
-            cmp_ltz_f32 = 14, // 32 bit 浮点数 与 0 比较，des = src < 0 ? 1 : 0
-            cmp_ltz_f64 = 15, // 64 bit 浮点数 与 0 比较，des = src < 0 ? 1 : 0
+            cmp_ltz_s32 = 12, // 32 bit 整数 与 0 比较，des = src < 0 ? 1 : 0
+            cmp_lez_s32 = 13, // 32 bit 整数 与 0 比较，des = src <= 0 ? 1 : 0
+            cmp_gtz_s32 = 14, // 32 bit 整数 与 0 比较，des = src > 0 ? 1 : 0
+            cmp_gez_s32 = 15, // 32 bit 整数 与 0 比较，des = src >= 0 ? 1 : 0
+            cmp_ltz_u32 = 16, // 32 bit 整数 与 0 比较，des = src < 0 ? 1 : 0
+            cmp_lez_u32 = 17, // 32 bit 整数 与 0 比较，des = src <= 0 ? 1 : 0
+            cmp_gtz_u32 = 18, // 32 bit 整数 与 0 比较，des = src > 0 ? 1 : 0
+            cmp_gez_u32 = 19, // 32 bit 整数 与 0 比较，des = src >= 0 ? 1 : 0
+            cmp_eqz_i32 = 20, // 32 bit 整数 与 0 比较，des = src == 0 ? 1 : 0
+            cmp_nez_i32 = 21, // 32 bit 整数 与 0 比较，des = src != 0 ? 1 : 0
 
-            cmp_lez_i32 = 16, // 32 bit 整数 与 0 比较，des = src <= 0 ? 1 : 0
-            cmp_lez_i64 = 17, // 64 bit 整数 与 0 比较，des = src <= 0 ? 1 : 0
-            cmp_lez_f32 = 18, // 32 bit 浮点数 与 0 比较，des = src <= 0 ? 1 : 0
-            cmp_lez_f64 = 19, // 64 bit 浮点数 与 0 比较，des = src <= 0 ? 1 : 0
+            cmp_ltz_s64 = 22, // 64 bit 整数 与 0 比较，des = src < 0 ? 1 : 0
+            cmp_lez_s64 = 23, // 64 bit 整数 与 0 比较，des = src <= 0 ? 1 : 0
+            cmp_gtz_s64 = 24, // 64 bit 整数 与 0 比较，des = src > 0 ? 1 : 0
+            cmp_gez_s64 = 25, // 64 bit 整数 与 0 比较，des = src >= 0 ? 1 : 0
+            cmp_ltz_u64 = 26, // 64 bit 整数 与 0 比较，des = src < 0 ? 1 : 0
+            cmp_lez_u64 = 27, // 64 bit 整数 与 0 比较，des = src <= 0 ? 1 : 0
+            cmp_gtz_u64 = 28, // 64 bit 整数 与 0 比较，des = src > 0 ? 1 : 0
+            cmp_gez_u64 = 29, // 64 bit 整数 与 0 比较，des = src >= 0 ? 1 : 0
+            cmp_eqz_i64 = 30, // 64 bit 整数 与 0 比较，des = src == 0 ? 1 : 0
+            cmp_nez_i64 = 31, // 64 bit 整数 与 0 比较，des = src != 0 ? 1 : 0
 
-            cmp_gtz_i32 = 20, // 32 bit 整数 与 0 比较，des = src > 0 ? 1 : 0
-            cmp_gtz_i64 = 21, // 64 bit 整数 与 0 比较，des = src > 0 ? 1 : 0
-            cmp_gtz_f32 = 22, // 32 bit 浮点数 与 0 比较，des = src > 0 ? 1 : 0
-            cmp_gtz_f64 = 23, // 64 bit 浮点数 与 0 比较，des = src > 0 ? 1 : 0
+            cmp_ltz_f32 = 32, // 32 bit 浮点
+            cmp_lez_f32 = 33, // 32 bit 浮点数 与 0 比较，des = src <= 0 ? 1 : 0数 与 0 比较，des = src < 0 ? 1 : 0
+            cmp_gtz_f32 = 34, // 32 bit 浮点数 与 0 比较，des = src > 0 ? 1 : 0
+            cmp_gez_f32 = 35, // 32 bit 浮点数 与 0 比较，des = src >= 0 ? 1 : 0
+            cmp_eqz_f32 = 36, // 32 bit 浮点数 与 0 比较，des = src == 0 ? 1 : 0
+            cmp_nez_f32 = 37, // 32 bit 浮点数 与 0 比较，des = src != 0 ? 1 : 0
 
-            cmp_gez_i32 = 24, // 32 bit 整数 与 0 比较，des = src >= 0 ? 1 : 0
-            cmp_gez_i64 = 25, // 64 bit 整数 与 0 比较，des = src >= 0 ? 1 : 0
-            cmp_gez_f32 = 26, // 32 bit 浮点数 与 0 比较，des = src >= 0 ? 1 : 0
-            cmp_gez_f64 = 27, // 64 bit 浮点数 与 0 比较，des = src >= 0 ? 1 : 0
-
-            cmp_eqz_i32 = 28, // 32 bit 整数 与 0 比较，des = src == 0 ? 1 : 0
-            cmp_eqz_i64 = 29, // 64 bit 整数 与 0 比较，des = src == 0 ? 1 : 0
-            cmp_eqz_f32 = 30, // 32 bit 浮点数 与 0 比较，des = src == 0 ? 1 : 0
-            cmp_eqz_f64 = 31, // 64 bit 浮点数 与 0 比较，des = src == 0 ? 1 : 0
-
-            cmp_nez_i32 = 32, // 32 bit 整数 与 0 比较，des = src != 0 ? 1 : 0
-            cmp_nez_i64 = 33, // 64 bit 整数 与 0 比较，des = src != 0 ? 1 : 0
-            cmp_nez_f32 = 34, // 32 bit 浮点数 与 0 比较，des = src != 0 ? 1 : 0
-            cmp_nez_f64 = 35, // 64 bit 浮点数 与 0 比较，des = src != 0 ? 1 : 0
+            cmp_ltz_f64 = 38, // 64 bit 浮点数 与 0 比较，des = src < 0 ? 1 : 0
+            cmp_lez_f64 = 39, // 64 bit 浮点数 与 0 比较，des = src <= 0 ? 1 : 0
+            cmp_gtz_f64 = 40, // 64 bit 浮点数 与 0 比较，des = src > 0 ? 1 : 0
+            cmp_gez_f64 = 41, // 64 bit 浮点数 与 0 比较，des = src >= 0 ? 1 : 0
+            cmp_eqz_f64 = 42, // 64 bit 浮点数 与 0 比较，des = src == 0 ? 1 : 0
+            cmp_nez_f64 = 43, // 64 bit 浮点数 与 0 比较，des = src != 0 ? 1 : 0
 
             // 三角函数
-            sin_f32 = 36,  // 32 bit 浮点数三角正弦函数
-            cos_f32 = 37,  // 32 bit 浮点数三角余弦函数
-            tan_f32 = 38,  // 32 bit 浮点数三角正切函数
-            asin_f32 = 39, // 32 bit 浮点数三角反正弦函数
-            acos_f32 = 40, // 32 bit 浮点数三角反余弦函数
-            atan_f32 = 41, // 32 bit 浮点数三角反正切函数
+            sin_f32 = 44,  // 32 bit 浮点数三角正弦函数
+            cos_f32 = 45,  // 32 bit 浮点数三角余弦函数
+            tan_f32 = 46,  // 32 bit 浮点数三角正切函数
+            asin_f32 = 47, // 32 bit 浮点数三角反正弦函数
+            acos_f32 = 48, // 32 bit 浮点数三角反余弦函数
+            atan_f32 = 49, // 32 bit 浮点数三角反正切函数
 
-            sin_f64 = 42,  // 64 bit 浮点数三角正弦函数
-            cos_f64 = 43,  // 64 bit 浮点数三角余弦函数
-            tan_f64 = 44,  // 64 bit 浮点数三角正切函数
-            asin_f64 = 45, // 64 bit 浮点数三角反正弦函数
-            acos_f64 = 46, // 64 bit 浮点数三角反余弦函数
-            atan_f64 = 47, // 64 bit 浮点数三角反正切函数
+            sin_f64 = 50,  // 64 bit 浮点数三角正弦函数
+            cos_f64 = 51,  // 64 bit 浮点数三角余弦函数
+            tan_f64 = 52,  // 64 bit 浮点数三角正切函数
+            asin_f64 = 53, // 64 bit 浮点数三角反正弦函数
+            acos_f64 = 54, // 64 bit 浮点数三角反余弦函数
+            atan_f64 = 55, // 64 bit 浮点数三角反正切函数
 
             // 倒数：reciprocal
-            recip_f32 = 48, // 32 bit 浮点数倒数函数
-            recip_f64 = 49, // 64 bit 浮点数倒数函数
+            recip_f32 = 56, // 32 bit 浮点数倒数函数
+            recip_f64 = 57, // 64 bit 浮点数倒数函数
 
         };
     };
@@ -256,41 +262,39 @@ namespace airrt::abc::Enum
 
             //---------------比较运算--------------
             cmp_eq_i32 = 48, // 32 bit 整数比较，des = src == src2 ? 1 : 0
-            cmp_eq_i64 = 49, // 64 bit 整数比较，des = src == src2 ? 1 : 0
-            cmp_eq_f32 = 50, // 32 bit 浮点数比较，des = src == src2 ? 1 : 0
-            cmp_eq_f64 = 51, // 64 bit 浮点数比较，des = src == src2 ? 1 : 0
+            cmp_ne_i32 = 49, // 32 bit 整数比较，des = src != src2 ? 1 : 0
+            cmp_lt_s32 = 50, // 32 bit 整数比较，des = src < src2 ? 1 : 0
+            cmp_lt_u32 = 51, // 32 bit 整数比较，des = src < src2 ? 1 : 0
+            cmp_le_s32 = 52, // 32 bit 整数比较，des = src <= src2 ? 1 : 0
+            cmp_le_u32 = 53, // 32 bit 整数比较，des = src <= src2 ? 1 : 0
+            cmp_gt_s32 = 54, // 32 bit 整数比较，des = src > src2 ? 1 : 0
+            cmp_gt_u32 = 55, // 32 bit 整数比较，des = src > src2 ? 1 : 0
+            cmp_ge_s32 = 56, // 32 bit 整数比较，des = src >= src2 ? 1 : 0
+            cmp_ge_u32 = 57, // 32 bit 整数比较，des = src >= src2 ? 1 : 0
 
-            cmp_ne_i32 = 52, // 32 bit 整数比较，des = src != src2 ? 1 : 0
-            cmp_ne_i64 = 53, // 64 bit 整数比较，des = src != src2 ? 1 : 0
-            cmp_ne_f32 = 54, // 32 bit 浮点数比较，des = src != src2 ? 1 : 0
-            cmp_ne_f64 = 55, // 64 bit 浮点数比较，des = src != src2 ? 1 : 0
+            cmp_eq_i64 = 58, // 64 bit 整数比较，des = src == src2 ? 1 : 0
+            cmp_ne_i64 = 59, // 64 bit 整数比较，des = src != src2 ? 1 : 0
+            cmp_lt_s64 = 60, // 64 bit 整数比较，des = src < src2 ? 1 : 0
+            cmp_lt_u64 = 61, // 64 bit 整数比较，des = src < src2 ? 1 : 0
+            cmp_le_s64 = 62, // 64 bit 整数比较，des = src <= src2 ? 1 : 0
+            cmp_le_u64 = 63, // 64 bit 整数比较，des = src <= src2 ? 1 : 0
+            cmp_gt_s64 = 64, // 64 bit 整数比较，des = src > src2 ? 1 : 0
+            cmp_gt_u64 = 65, // 64 bit 整数比较，des = src > src2 ? 1 : 0
+            cmp_ge_s64 = 66, // 64 bit 整数比较，des = src >= src2 ? 1 : 0
+            cmp_ge_u64 = 67, // 64 bit 整数比较，des = src >= src2 ? 1 : 0
 
-            cmp_lt_s32 = 56, // 32 bit 整数比较，des = src < src2 ? 1 : 0
-            cmp_lt_u32 = 57, // 32 bit 整数比较，des = src < src2 ? 1 : 0
-            cmp_lt_s64 = 58, // 64 bit 整数比较，des = src < src2 ? 1 : 0
-            cmp_lt_u64 = 59, // 64 bit 整数比较，des = src < src2 ? 1 : 0
-            cmp_lt_f32 = 60, // 32 bit 浮点数比较，des = src < src2 ? 1 : 0
-            cmp_lt_f64 = 61, // 64 bit 浮点数比较，des = src < src2 ? 1 : 0
-
-            cmp_le_s32 = 62, // 32 bit 整数比较，des = src <= src2 ? 1 : 0
-            cmp_le_u32 = 63, // 32 bit 整数比较，des = src <= src2 ? 1 : 0
-            cmp_le_s64 = 64, // 64 bit 整数比较，des = src <= src2 ? 1 : 0
-            cmp_le_u64 = 65, // 64 bit 整数比较，des = src <= src2 ? 1 : 0
-            cmp_le_f32 = 66, // 32 bit 浮点数比较，des = src <= src2 ? 1 : 0
-            cmp_le_f64 = 67, // 64 bit 浮点数比较，des = src <= src2 ? 1 : 0
-
-            cmp_gt_s32 = 68, // 32 bit 整数比较，des = src > src2 ? 1 : 0
-            cmp_gt_u32 = 69, // 32 bit 整数比较，des = src > src2 ? 1 : 0
-            cmp_gt_s64 = 70, // 64 bit 整数比较，des = src > src2 ? 1 : 0
-            cmp_gt_u64 = 71, // 64 bit 整数比较，des = src > src2 ? 1 : 0
+            cmp_eq_f32 = 68, // 32 bit 浮点数比较，des = src == src2 ? 1 : 0
+            cmp_ne_f32 = 69, // 32 bit 浮点数比较，des = src != src2 ? 1 : 0
+            cmp_lt_f32 = 70, // 32 bit 浮点数比较，des = src < src2 ? 1 : 0
+            cmp_le_f32 = 71, // 32 bit 浮点数比较，des = src <= src2 ? 1 : 0
             cmp_gt_f32 = 72, // 32 bit 浮点数比较，des = src > src2 ? 1 : 0
-            cmp_gt_f64 = 73, // 64 bit 浮点数比较，des = src < src2 ? 1 : 0
+            cmp_ge_f32 = 73, // 32 bit 浮点数比较，des = src >= src2 ? 1 : 0
 
-            cmp_ge_s32 = 74, // 32 bit 整数比较，des = src >= src2 ? 1 : 0
-            cmp_ge_u32 = 75, // 32 bit 整数比较，des = src >= src2 ? 1 : 0
-            cmp_ge_s64 = 76, // 64 bit 整数比较，des = src >= src2 ? 1 : 0
-            cmp_ge_u64 = 77, // 64 bit 整数比较，des = src >= src2 ? 1 : 0
-            cmp_ge_f32 = 78, // 32 bit 浮点数比较，des = src >= src2 ? 1 : 0
+            cmp_eq_f64 = 74, // 64 bit 浮点数比较，des = src == src2 ? 1 : 0
+            cmp_ne_f64 = 75, // 64 bit 浮点数比较，des = src != src2 ? 1 : 0
+            cmp_lt_f64 = 76, // 64 bit 浮点数比较，des = src < src2 ? 1 : 0
+            cmp_le_f64 = 77, // 64 bit 浮点数比较，des = src <= src2 ? 1 : 0
+            cmp_gt_f64 = 78, // 64 bit 浮点数比较，des = src < src2 ? 1 : 0
             cmp_ge_f64 = 79, // 64 bit 浮点数比较，des = src >= src2 ? 1 : 0
 
             //-------------标准数学指令---------------
@@ -322,36 +326,139 @@ namespace airrt::abc::Enum
     {
         enum : unsigned int
         {
-            cmp_ltz_i32 = 0, // 32 bit 整数 与 0 比较，des = src < 0 ? 1 : 0
-            cmp_ltz_i64 = 1, // 64 bit 整数 与 0 比较，des = src < 0 ? 1 : 0
-            cmp_ltz_f32 = 2, // 32 bit 浮点数 与 0 比较，des = src < 0 ? 1 : 0
-            cmp_ltz_f64 = 3, // 64 bit 浮点数 与 0 比较，des = src < 0 ? 1 : 0
+            eq_i32 = 0, // 32 bit 整数 与 0 比较，des = src == 0 ? 1 : 0
+            ne_i32 = 1, // 32 bit 整数 与 0 比较，des = src != 0 ? 1 : 0
 
-            cmp_lez_i32 = 16, // 32 bit 整数 与 0 比较，des = src <= 0 ? 1 : 0
-            cmp_lez_i64 = 17, // 64 bit 整数 与 0 比较，des = src <= 0 ? 1 : 0
-            cmp_lez_f32 = 18, // 32 bit 浮点数 与 0 比较，des = src <= 0 ? 1 : 0
-            cmp_lez_f64 = 19, // 64 bit 浮点数 与 0 比较，des = src <= 0 ? 1 : 0
+            lt_s32 = 2, // 32 bit 整数 与 0 比较，des = src < 0 ? 1 : 0
+            le_s32 = 3, // 32 bit 整数 与 0 比较，des = src <= 0 ? 1 : 0
+            gt_s32 = 4, // 32 bit 整数 与 0 比较，des = src > 0 ? 1 : 0
+            ge_s32 = 5, // 32 bit 整数 与 0 比较，des = src >= 0 ? 1 : 0
 
-            cmp_gtz_i32 = 20, // 32 bit 整数 与 0 比较，des = src > 0 ? 1 : 0
-            cmp_gtz_i64 = 21, // 64 bit 整数 与 0 比较，des = src > 0 ? 1 : 0
-            cmp_gtz_f32 = 22, // 32 bit 浮点数 与 0 比较，des = src > 0 ? 1 : 0
-            cmp_gtz_f64 = 23, // 64 bit 浮点数 与 0 比较，des = src > 0 ? 1 : 0
+            lt_u32 = 6, // 32 bit 整数 与 0 比较，des = src < 0 ? 1 : 0
+            le_u32 = 7, // 32 bit 整数 与 0 比较，des = src <= 0 ? 1 : 0
+            gt_u32 = 8, // 32 bit 整数 与 0 比较，des = src > 0 ? 1 : 0
+            ge_u32 = 9, // 32 bit 整数 与 0 比较，des = src >= 0 ? 1 : 0
 
-            cmp_gez_i32 = 24, // 32 bit 整数 与 0 比较，des = src >= 0 ? 1 : 0
-            cmp_gez_i64 = 25, // 64 bit 整数 与 0 比较，des = src >= 0 ? 1 : 0
-            cmp_gez_f32 = 26, // 32 bit 浮点数 与 0 比较，des = src >= 0 ? 1 : 0
-            cmp_gez_f64 = 27, // 64 bit 浮点数 与 0 比较，des = src >= 0 ? 1 : 0
+            eq_i64 = 10, // 64 bit 整数 与 0 比较，des = src == 0 ? 1 : 0
+            ne_i64 = 11, // 64 bit 整数 与 0 比较，des = src != 0 ? 1 : 0
 
-            cmp_eqz_i32 = 28, // 32 bit 整数 与 0 比较，des = src == 0 ? 1 : 0
-            cmp_eqz_i64 = 29, // 64 bit 整数 与 0 比较，des = src == 0 ? 1 : 0
-            cmp_eqz_f32 = 30, // 32 bit 浮点数 与 0 比较，des = src == 0 ? 1 : 0
-            cmp_eqz_f64 = 31, // 64 bit 浮点数 与 0 比较，des = src == 0 ? 1 : 0
+            lt_s64 = 12, // 64 bit 整数 与 0 比较，des = src < 0 ? 1 : 0
+            le_s64 = 13, // 64 bit 整数 与 0 比较，des = src <= 0 ? 1 : 0
+            gt_s64 = 14, // 64 bit 整数 与 0 比较，des = src > 0 ? 1 : 0
+            ge_s64 = 15, // 64 bit 整数 与 0 比较，des = src >= 0 ? 1 : 0
 
-            cmp_nez_i32 = 32, // 32 bit 整数 与 0 比较，des = src != 0 ? 1 : 0
-            cmp_nez_i64 = 33, // 64 bit 整数 与 0 比较，des = src != 0 ? 1 : 0
-            cmp_nez_f32 = 34, // 32 bit 浮点数 与 0 比较，des = src != 0 ? 1 : 0
-            cmp_nez_f64 = 35, // 64 bit 浮点数 与 0 比较，des = src != 0 ? 1 : 0
+            lt_u64 = 16, // 64 bit 整数 与 0 比较，des = src < 0 ? 1 : 0
+            le_u64 = 17, // 64 bit 整数 与 0 比较，des = src <= 0 ? 1 : 0
+            gt_u64 = 18, // 64 bit 整数 与 0 比较，des = src > 0 ? 1 : 0
+            ge_u64 = 19, // 64 bit 整数 与 0 比较，des = src >= 0 ? 1 : 0
 
+            lt_f32 = 20, // 32 bit 浮点
+            le_f32 = 21, // 32 bit 浮点数 与 0 比较，des = src <= 0 ? 1 : 0数 与 0 比较，des = src < 0 ? 1 : 0
+            gt_f32 = 22, // 32 bit 浮点数 与 0 比较，des = src > 0 ? 1 : 0
+            ge_f32 = 23, // 32 bit 浮点数 与 0 比较，des = src >= 0 ? 1 : 0
+            eq_f32 = 24, // 32 bit 浮点数 与 0 比较，des = src == 0 ? 1 : 0
+            ne_f32 = 25, // 32 bit 浮点数 与 0 比较，des = src != 0 ? 1 : 0
+
+            lt_f64 = 26, // 64 bit 浮点数 与 0 比较，des = src < 0 ? 1 : 0
+            le_f64 = 27, // 64 bit 浮点数 与 0 比较，des = src <= 0 ? 1 : 0
+            gt_f64 = 28, // 64 bit 浮点数 与 0 比较，des = src > 0 ? 1 : 0
+            ge_f64 = 29, // 64 bit 浮点数 与 0 比较，des = src >= 0 ? 1 : 0
+            eq_f64 = 30, // 64 bit 浮点数 与 0 比较，des = src == 0 ? 1 : 0
+            ne_f64 = 31, // 64 bit 浮点数 与 0 比较，des = src != 0 ? 1 : 0
+
+        };
+    };
+
+    // 比较跳转指令子码
+    struct jbr
+    {
+        enum : unsigned int
+        {
+            eq_i32 = 0, // 32 bit 整数比较，des = src == 0 ? 1 : 0
+            ne_i32 = 1, // 32 bit 整数比较，des = src != 0 ? 1 : 0
+
+            lt_s32 = 2, // 32 bit 整数比较，des = src < 0 ? 1 : 0
+            le_s32 = 3, // 32 bit 整数比较，des = src <= 0 ? 1 : 0
+            gt_s32 = 4, // 32 bit 整数比较，des = src > 0 ? 1 : 0
+            ge_s32 = 5, // 32 bit 整数比较，des = src >= 0 ? 1 : 0
+
+            lt_u32 = 6, // 32 bit 整数比较，des = src < 0 ? 1 : 0
+            le_u32 = 7, // 32 bit 整数比较，des = src <= 0 ? 1 : 0
+            gt_u32 = 8, // 32 bit 整数比较，des = src > 0 ? 1 : 0
+            ge_u32 = 9, // 32 bit 整数比较，des = src >= 0 ? 1 : 0
+
+            eq_i64 = 10, // 64 bit 整数比较，des = src == 0 ? 1 : 0
+            ne_i64 = 11, // 64 bit 整数比较，des = src != 0 ? 1 : 0
+
+            lt_s64 = 12, // 64 bit 整数比较，des = src < 0 ? 1 : 0
+            le_s64 = 13, // 64 bit 整数比较，des = src <= 0 ? 1 : 0
+            gt_s64 = 14, // 64 bit 整数比较，des = src > 0 ? 1 : 0
+            ge_s64 = 15, // 64 bit 整数比较，des = src >= 0 ? 1 : 0
+
+            lt_u64 = 16, // 64 bit 整数比较，des = src < 0 ? 1 : 0
+            le_u64 = 17, // 64 bit 整数比较，des = src <= 0 ? 1 : 0
+            gt_u64 = 18, // 64 bit 整数比较，des = src > 0 ? 1 : 0
+            ge_u64 = 19, // 64 bit 整数比较，des = src >= 0 ? 1 : 0
+
+            lt_f32 = 20, // 32 bit 浮点
+            le_f32 = 21, // 32 bit 浮点数比较，des = src <= 0 ? 1 : 0数比较，des = src < 0 ? 1 : 0
+            gt_f32 = 22, // 32 bit 浮点数比较，des = src > 0 ? 1 : 0
+            ge_f32 = 23, // 32 bit 浮点数比较，des = src >= 0 ? 1 : 0
+            eq_f32 = 24, // 32 bit 浮点数比较，des = src == 0 ? 1 : 0
+            ne_f32 = 25, // 32 bit 浮点数比较，des = src != 0 ? 1 : 0
+
+            lt_f64 = 26, // 64 bit 浮点数比较，des = src < 0 ? 1 : 0
+            le_f64 = 27, // 64 bit 浮点数比较，des = src <= 0 ? 1 : 0
+            gt_f64 = 28, // 64 bit 浮点数比较，des = src > 0 ? 1 : 0
+            ge_f64 = 29, // 64 bit 浮点数比较，des = src >= 0 ? 1 : 0
+            eq_f64 = 30, // 64 bit 浮点数比较，des = src == 0 ? 1 : 0
+            ne_f64 = 31, // 64 bit 浮点数比较，des = src != 0 ? 1 : 0
+
+        };
+    };
+    // 函数返回指令子码
+    struct ret
+    {
+        enum : unsigned int
+        {
+            void_ = 0, // 无值返回
+
+            // 立即数值
+            imm_s16, // 16 bit 有符号整数返回
+            imm_u16, // 16 bit 无符号整数返回
+            imm_s32, // 32 bit 有符号整数返回
+            imm_u32, // 32 bit 无符号整数返回
+            imm_s64, // 64 bit 有符号整数返回
+            imm_u64, // 64 bit 无符号整数返回
+            imm_f32, // 32 bit 浮点数返回
+            imm_f64, // 64 bit 浮点数返回
+
+            // 寄存器值
+            reg_B0_s8, //
+            reg_B0_u8, //
+            reg_B1_s8, //
+            reg_B1_u8, //
+            reg_B2_s8, //
+            reg_B2_u8, //
+            reg_B3_s8, //
+            reg_B3_u8, //
+
+            reg_L_s16, //
+            reg_L_u16, //
+            reg_H_s16, //
+            reg_H_u16, //
+
+            reg_s32, // 32 bit 有符号整数返回
+            reg_u32, // 32 bit 无符号整数返回
+            reg_s64, // 64 bit 有符号整数返回
+            reg_u64, // 64 bit 无符号整数返回
+            reg_f32, // 32 bit 浮点数返回
+            reg_f64, // 64 bit 浮点数返回
+
+            reg_ptr, // 返回寄存中存储的指针值
+
+            set_address, // 设置返回值存储地址
+            get_address, // 获取返回值存储地址
         };
     };
 }

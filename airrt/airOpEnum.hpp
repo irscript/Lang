@@ -73,8 +73,15 @@ namespace airrt::abc::Enum
             jmp_reg_I8 = 26,
             // 直接跳转指令：op-reg:8-8-16,中间 8 bit 为对齐域
             jmp_reg_I16 = 27,
-            // 0 比较跳转指令：op-sub-reg-offset:8-8-16-32
+            // 0 比较跳转指令：op-sub-src-offset:8-8-16-32
             jbrz_subop = 28,
+            // 比较跳转指令：op-sub-src-src2-offset:8-8-8-8-32
+            jbr_I8_subop = 29,
+            // 比较跳转指令：op-sub-src-src2-offset:8-8-16-16-32
+            jbr_I16_subop = 30,
+
+            // 函数返回指令：op-sub-imm/reg:8-8-*
+            ret_subop = 31,
 
         };
     };
